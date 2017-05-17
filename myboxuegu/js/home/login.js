@@ -31,7 +31,7 @@ define(['jquery_form', 'jquery_cookie', 'jquery', 'nprogress', 'util'], function
 			$.cookie('userInfo', JSON.stringify(data.result), { 
 				path: '/',
 				//expires: new Date(Date.now() + 1000 * 60 * 60)
-				'max-age': 1000000
+				expires:3
 			});
 			location.href = '/';
 		},

@@ -39,7 +39,10 @@ require.config({
 		bootstrap: 'lib/bootstrap/js/bootstrap.min',
 		jquery_form: 'lib/jquery-form/jquery.form',
 		jquery_cookie: 'lib/jquery-cookie/jquery.cookie',
-		
+		jquery_uploadify:'lib/uploadify/jquery.uploadify.min',
+		jquery_datepicker: 'lib/jquery-bootstrap-datepicker/js/bootstrap-datepicker.min',
+		jquery_datepicker_CN: 'lib/jquery-bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min',
+		jquery_region: 'lib/jquery-region/jquery.region',
 		// 不依赖jquery的
 		nprogress: 'lib/nprogress/nprogress',
 		template: 'lib/artTemplate/template'
@@ -51,7 +54,13 @@ require.config({
 		// bootstrap是普通模块，但是依赖与jquery，所以这里配置
 		bootstrap: {
 			deps: ['jquery']
-		}
+		},
+    jquery_uploadify:{
+      deps:['jquery']
+		},
+		jquery_datepicker_CN: {
+			deps: ['jquery', 'jquery_datepicker']
+		},
 	}
 });
 
@@ -85,6 +94,7 @@ var obj = {
 	'/html/course/course_add_step1.html': 'csAdd1',
 	'/html/course/course_add_step2.html': 'csAdd2',
 	'/html/course/course_add_step3.html': 'csAdd3'
+
 
 };
 

@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>学IT - 后台管理系统</title>
     <!-- 样式 -->
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/html/common/style.html')?>
 </head>
+
 <body>
-    
+
     <!-- 侧边栏 -->
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/html/common/aside.html')?>
     <!-- 主体 -->
     <div class="main">
         <div class="container-fluid">
             <!-- 头部 -->
-        	<?php include($_SERVER['DOCUMENT_ROOT'] . '/html/common/header.html')?>
+            <?php include($_SERVER['DOCUMENT_ROOT'] . '/html/common/header.html')?>
             <div class="body teacher">
                 <!-- 面包屑 -->
                 <ol class="breadcrumb">
@@ -22,7 +24,7 @@
                     <li class="active">讲师编辑</li>
                 </ol>
                 <div class="teacher-add">
-                    <form action="" class="form-horizontal col-xs-offset-2">
+                    <!--<form action="" class="form-horizontal col-xs-offset-2">
                         <div class="form-group">
                             <label for="" class="col-xs-3 control-label">姓名</label>
                             <div class="col-xs-4">
@@ -64,15 +66,57 @@
                         <div class="form-group">
                             <div class="col-xs-7">
                                 <a href="./advert_list.html" class="btn btn-success btn-sm pull-right"> 添 加 </a>
-                            </div>                          
+                            </div>
                         </div>
-                    </form>
+                    </form>-->
                 </div>
             </div>
         </div>
     </div>
     <!-- AJAX的loading -->
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/html/common/loading.html')?>
-	<script src="/lib/requirejs/require-2.3.3.js" data-main="/js/common/main"></script>
+    <script src="/lib/requirejs/require-2.3.3.js" data-main="/js/common/main"></script>
+    <script id="edit-teacher" type="editTeacher/tpl">
+        <form action="/v6/teacher/update" method="post" class="form-horizontal col-xs-offset-2">
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">姓名</label>
+                <div class="col-xs-4">
+                    <input type="text" name="tc_name" class="form-control input-sm" placeholder="讲师名称" value="{{ tc_name }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for=""  class="col-xs-3 control-label">入职时间</label>
+                <div class="col-xs-4">
+                    <input name="tc_join_date" type="text" class="form-control input-sm" value="{{ tc_join_date }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">类型</label>
+                <div class="col-xs-2">
+                    <select name="tc_type" class="form-control input-sm">
+                                    <option value="1" {{tc_type==1? "selected":""}}>讲师</option>
+                                    <option value="0" {{tc_type!=1? "selected":""}}>管理员</option>
+                                </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">性别</label>
+                <div class="col-xs-4">
+                    <label class="radio-inline">
+                    <input name="tc_gender" type="radio" {{ tc_gender === 0? 'checked': ''  }} value="0"> 男
+                                </label>
+                    <label class="radio-inline">
+                   <input name="tc_gender" type="radio" {{ tc_gender !== 0? 'checked': ''  }} value="1"> 女
+                                </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-7">
+                    <button type="submit" class="btn btn-success btn-sm pull-right">修改 </button>
+                </div>
+            </div>
+        </form>
+    </script>
 </body>
+
 </html>
