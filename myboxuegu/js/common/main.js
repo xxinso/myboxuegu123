@@ -39,10 +39,11 @@ require.config({
 		bootstrap: 'lib/bootstrap/js/bootstrap.min',
 		jquery_form: 'lib/jquery-form/jquery.form',
 		jquery_cookie: 'lib/jquery-cookie/jquery.cookie',
-		jquery_uploadify:'lib/uploadify/jquery.uploadify.min',
+		jquery_region: 'lib/jquery-region/jquery.region',
 		jquery_datepicker: 'lib/jquery-bootstrap-datepicker/js/bootstrap-datepicker.min',
 		jquery_datepicker_CN: 'lib/jquery-bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min',
-		jquery_region: 'lib/jquery-region/jquery.region',
+		jquery_uploadify: 'lib/uploadify/jquery.uploadify.min',
+		
 		// 不依赖jquery的
 		nprogress: 'lib/nprogress/nprogress',
 		template: 'lib/artTemplate/template'
@@ -55,12 +56,15 @@ require.config({
 		bootstrap: {
 			deps: ['jquery']
 		},
-    jquery_uploadify:{
-      deps:['jquery']
-		},
+		
+		// 这是日期插件的语言包，依赖jquery和日期插件两个文件
 		jquery_datepicker_CN: {
 			deps: ['jquery', 'jquery_datepicker']
 		},
+		
+		jquery_uploadify: {
+			deps: ['jquery']
+		}
 	}
 });
 
@@ -88,14 +92,12 @@ var obj = {
 	'/html/user/profile.html': 'usProfile',
 	'/html/user/list.html': 'usList',
 	'/html/course/add.html': 'csAdd',
-	'/html/course/list.html': 'usList',
+	'/html/course/list.html': 'csList',
 	'/html/course/category_add.html': 'cgAdd',
 	'/html/course/category_list.html': 'cgList',
 	'/html/course/course_add_step1.html': 'csAdd1',
 	'/html/course/course_add_step2.html': 'csAdd2',
 	'/html/course/course_add_step3.html': 'csAdd3'
-
-
 };
 
 // 根据页面的pathname获取要加载的模块名

@@ -6,9 +6,11 @@ define(['header', 'aside', 'util', 'nprogress', 'jquery_form', 'jquery'], functi
 		'loading': []
 	});
 	
-	// 表单转ajax提交，成功后跳转到讲师列表页
-	$('.teacher-add form').ajaxForm(function(data) {
-		location.href = '/html/course/course_add_step1.html"+data.result.cs_id+"';
+	/**
+	 * 创建课程
+	 * */
+	$('form').ajaxForm(function(data) {
+		location.href = '/html/course/course_add_step1.html?cs_id='+data.result.cs_id;
 	});
 	
 	// 销毁网站加载进度条

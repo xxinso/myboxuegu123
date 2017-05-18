@@ -47,11 +47,60 @@
 
     <!-- 模态框 添加课程 -->
     <div class="modal fade" id="teacherModal">
-       
+        <!-- 讲师详细信息的坑 -->
     </div>
     
     <!-- AJAX的loading -->
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/html/common/loading.html')?>
+    
+	<!-- 讲师详细信息模版 -->
+	<script id="teacher-modal-tpl" type="text/tpl">
+		<div class="modal-dialog" style="width: 750px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="panel-title">讲师信息</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-condensed">
+                        <tbody>
+                            <tr>
+                                <th>姓名:</th><td>{{ tc_name }}</td>
+                                <th>职位:</th><td colspan="3">讲师</td>
+                                <td rowspan="4" width="128">
+                                    <div class="avatar">
+                                        <img src="{{ tc_avatar? tc_avatar: '/img/default.png' }}" alt="">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>花名:</th><td>{{ tc_roster }}</td>
+                                <th>出生日期:</th><td colspan="3">{{ tc_birthday }}</td>
+                            </tr>
+                            <tr>
+                                <th>性别:</th><td>{{ tc_gender == 0? '男': '女' }}</td>
+                                <th>入职日期:</th><td colspan="3">{{ tc_join_date }}</td>
+                            </tr>
+                            <tr>
+                                <th>手机号码:</th><td colspan="2">{{ tc_cellphone }}</td>
+                                <th>邮箱:</th><td colspan="2">{{ tc_email }}</td>
+                            </tr>
+                            <tr>
+                                <th>籍贯:</th><td colspan="6">{{ tc_hometown }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="7">
+                                    <div class="introduce">
+                                        {{ tc_introduce }}
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+	</script>
 	
 	<!-- 讲师列表模版 -->
 	<script id="tc-list-tpl" type="text/tpl">
@@ -65,63 +114,16 @@
                 <td>{{ $value.tc_gender == 0? '男': '女' }}</td>
                 <td>{{ $value.tc_cellphone }}</td>
                 <td>
-                    <a href="#teacherModal" data-toggle="modal" class="btn btn-info btn-xs look">查 看</a>
+                    <a href="#teacherModal" data-tc-id="{{ $value.tc_id }}" data-toggle="modal" class="btn btn-info btn-xs">查 看</a>
                     <a href="./edit.html?tc_id={{ $value.tc_id }}" class="btn btn-info btn-xs">编 辑</a>
-                   
-<a href="javascript::" data-tc-id="{{ $value.tc_id }}" data-tc-status="{{ $value.tc_status }}" 
-                    	class="btn btn-warning btn-xs tc-status-btn anniu">{{ $value.tc_status == 0? '注 销': '启 用' }}</a>
+                    <!-- tc_status值为0讲师当前是启用状态，那么按钮应该展示注销；否则相反 -->
+                    <a href="javascript::" data-tc-id="{{ $value.tc_id }}" data-tc-status="{{ $value.tc_status }}" 
+                    	class="btn btn-warning btn-xs tc-status-btn">{{ $value.tc_status == 0? '注 销': '启 用' }}</a>
                 </td>
             </tr>
             {{ /each }}
         </tbody>
 	</script>
-    <script type="jsxq/tpl" id="teacher-detail">
-       <div class="modal-dialog" style="width: 750px;">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="panel-title">讲师信息</h4>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-bordered table-condensed">
-                        <tbody>
-                            <tr>
-                                <th>姓名:</th><td>{{ tc_name }}</td>
-                                <th>职位:</th><td colspan="3">老师</td>
-                                <td rowspan="4" width="128">
-                                    <div class="avatar">
-                                        <img src={{tc_avatar||"./images/default.png"}} alt="">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>花名:</th><td>{{ tc_roster }}</td>
-                                <th>出生日期:</th><td colspan="3">{{ tc_birthday }}</td>
-                            </tr>
-                            <tr>
-                                <th>性别:</th><td>{{tc_gender==1? "男":"女"}}</td>
-                                <th>出生日期:</th><td colspan="3">{{ tc_birthday }}</td>
-                            </tr>
-                            <tr>
-                                <th>手机号码:</th><td colspan="2">{{ tc_cellphone }}</td>
-                                <th>邮箱:</th><td colspan="2">{{ tc_email }}</td>
-                            </tr>
-                            <tr>
-                                <th>籍贯:</th><td colspan="6">{{ tc_hometown }}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="7">
-                                    <div class="introduce">
-                                        {{tc_introduce}}
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>   
-    </script>
 	
 	<script src="/lib/requirejs/require-2.3.3.js" data-main="/js/common/main"></script>
 </body>
